@@ -12,14 +12,17 @@ class _UserDashboardState extends State<UserDashboard> {
 
   final List<Widget> _pages = const [
     HomePage(),
+    OrdersPage(),
     ProfilePage(),
-    AnalyticsPage(),
-    SettingsPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('User Dashboard'),
+        backgroundColor: Colors.deepPurple,
+      ),
       body: _pages[_currentIndex],
 
       bottomNavigationBar: BottomNavigationBar(
@@ -34,20 +37,16 @@ class _UserDashboardState extends State<UserDashboard> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.store),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag),
+            label: 'Orders',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.analytics),
-            label: 'Analytics',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
           ),
         ],
       ),
@@ -62,8 +61,39 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home Dashboard', style: TextStyle(fontSize: 22)),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(Icons.store, size: 60, color: Colors.deepPurple),
+          SizedBox(height: 10),
+          Text(
+            'Browse Products',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class OrdersPage extends StatelessWidget {
+  const OrdersPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const [
+          Icon(Icons.shopping_bag, size: 60, color: Colors.deepPurple),
+          SizedBox(height: 10),
+          Text(
+            'My Orders',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -73,30 +103,25 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Profile Screen', style: TextStyle(fontSize: 22)),
-    );
-  }
-}
-
-class AnalyticsPage extends StatelessWidget {
-  const AnalyticsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Analytics Screen', style: TextStyle(fontSize: 22)),
-    );
-  }
-}
-
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Settings Screen', style: TextStyle(fontSize: 22)),
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Icon(Icons.person, size: 60, color: Colors.deepPurple),
+          const SizedBox(height: 10),
+          const Text(
+            'User Profile',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context); // logout
+            },
+            child: const Text('Logout'),
+          ),
+        ],
+      ),
     );
   }
 }
