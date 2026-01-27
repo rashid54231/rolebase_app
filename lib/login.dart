@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'supabase.dart';
-import 'admin_dashboard.dart';
-import 'manager_dashboard.dart';
-import 'user_dashboard.dart';
+import 'admin/admin_dashboard.dart';
+import 'manager/manager_dashboard.dart';
+import 'user/user_dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
