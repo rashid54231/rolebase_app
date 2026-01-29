@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'admin_users_screen.dart';
+import 'admin_products_screen.dart';
+import 'admin_orders_screen.dart';
 
 class AdminDashboard extends StatelessWidget {
   const AdminDashboard({super.key});
@@ -31,8 +34,10 @@ class AdminDashboard extends StatelessWidget {
                 title: const Text('Manage Users'),
                 subtitle: const Text('Users & Managers control'),
                 onTap: () {
-                  // Navigator.push(context,
-                  //   MaterialPageRoute(builder: (_) => AdminUsersScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const AdminUsersScreen()),
+                  );
                 },
               ),
             ),
@@ -44,8 +49,10 @@ class AdminDashboard extends StatelessWidget {
                 title: const Text('Manage Products'),
                 subtitle: const Text('Add, edit or delete products'),
                 onTap: () {
-                  // Navigator.push(context,
-                  //   MaterialPageRoute(builder: (_) => AdminProductsScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const AdminProductsScreen()),
+                  );
                 },
               ),
             ),
@@ -57,8 +64,10 @@ class AdminDashboard extends StatelessWidget {
                 title: const Text('Manage Orders'),
                 subtitle: const Text('View all orders'),
                 onTap: () {
-                  // Navigator.push(context,
-                  //   MaterialPageRoute(builder: (_) => AdminOrdersScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => const AdminOrdersScreen()),
+                  );
                 },
               ),
             ),
