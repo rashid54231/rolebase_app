@@ -9,67 +9,87 @@ class AdminDashboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text('Admin Dashboard'),
+        title: const Text(
+          'Admin Dashboard',
+          style: TextStyle(fontWeight: FontWeight.w600),
+        ),
+        elevation: 0,
         backgroundColor: Colors.deepPurple,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
               'Welcome Admin',
               style: TextStyle(
-                fontSize: 22,
+                fontSize: 28,
                 fontWeight: FontWeight.bold,
+                color: Colors.black87,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Manage your application from here',
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.grey[600],
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 32),
 
             // 1️⃣ USERS
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.people),
-                title: const Text('Manage Users'),
-                subtitle: const Text('Users & Managers control'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const AdminUsersScreen()),
-                  );
-                },
-              ),
+            _buildMenuCard(
+              context,
+              icon: Icons.people_rounded,
+              iconColor: Colors.blue,
+              title: 'Manage Users',
+              subtitle: 'Users & Managers control',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AdminUsersScreen()),
+                );
+              },
             ),
+
+            const SizedBox(height: 16),
 
             // 2️⃣ PRODUCTS
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.shopping_cart),
-                title: const Text('Manage Products'),
-                subtitle: const Text('Add, edit or delete products'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const AdminProductsScreen()),
-                  );
-                },
-              ),
+            _buildMenuCard(
+              context,
+              icon: Icons.shopping_bag_rounded,
+              iconColor: Colors.orange,
+              title: 'Manage Products',
+              subtitle: 'Add, edit or delete products',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AdminProductsScreen()),
+                );
+              },
             ),
 
+            const SizedBox(height: 16),
+
             // 3️⃣ ORDERS
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.receipt),
-                title: const Text('Manage Orders'),
-                subtitle: const Text('View all orders'),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => const AdminOrdersScreen()),
-                  );
-                },
-              ),
+            _buildMenuCard(
+              context,
+              icon: Icons.receipt_long_rounded,
+              iconColor: Colors.green,
+              title: 'Manage Orders',
+              subtitle: 'View all orders',
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AdminOrdersScreen()),
+                );
+              },
             ),
 
             const Spacer(),
@@ -77,16 +97,96 @@ class AdminDashboard extends StatelessWidget {
             // LOGOUT
             ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                minimumSize: const Size(double.infinity, 48),
+                backgroundColor: Colors.red[400],
+                foregroundColor: Colors.white,
+                elevation: 0,
+                minimumSize: const Size(double.infinity, 54),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.logout),
-              label: const Text('Logout'),
+              icon: const Icon(Icons.logout_rounded),
+              label: const Text(
+                'Logout',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuCard(
+      BuildContext context, {
+        required IconData icon,
+        required Color iconColor,
+        required String title,
+        required String subtitle,
+        required VoidCallback onTap,
+      }) {
+    return Card(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: Colors.grey[200]!),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  color: iconColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Icon(
+                  icon,
+                  color: iconColor,
+                  size: 28,
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey[600],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 18,
+                color: Colors.grey[400],
+              ),
+            ],
+          ),
         ),
       ),
     );
